@@ -14,11 +14,16 @@ const About = () => {
           
           <Card className="mb-8">
             <CardContent className="pt-6">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                The BatStateU Lost & Found Portal is a dedicated reporting system designed to help students, 
+                faculty, and staff of Batangas State University document lost and found items. This platform 
+                serves as a centralized database where the university administration can monitor and manage 
+                all lost and found reports for record-keeping and documentation purposes.
+              </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                The BatStateU Lost & Found Portal is a dedicated service designed to help students, 
-                faculty, and staff of Batangas State University recover their lost belongings efficiently 
-                and securely. We understand how stressful it can be to lose important items, and our 
-                mission is to make the recovery process as smooth and reliable as possible.
+                All found items must be surrendered to the respective Department Dean's Office, where they 
+                will be securely stored. This system ensures privacy and security by keeping contact information 
+                confidential and maintaining proper administrative oversight.
               </p>
             </CardContent>
           </Card>
@@ -67,10 +72,10 @@ const About = () => {
                     <Clock className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg mb-2">Quick Response</h3>
+                    <h3 className="font-bold text-lg mb-2">Privacy Protection</h3>
                     <p className="text-muted-foreground text-sm">
-                      Real-time posting and searching capabilities ensure that lost items can be 
-                      matched with finders as quickly as possible.
+                      Contact information remains confidential. All items are handled through the 
+                      Department Dean's Office to ensure security and proper verification.
                     </p>
                   </div>
                 </div>
@@ -97,25 +102,47 @@ const About = () => {
 
           <Card className="bg-primary text-primary-foreground">
             <CardContent className="pt-6">
-              <h2 className="text-2xl font-bold mb-4">How to Claim an Item</h2>
-              <ol className="space-y-3 text-primary-foreground/90">
-                <li className="flex gap-3">
-                  <span className="font-bold">1.</span>
-                  <span>Search for your lost item in our Found Items section</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold">2.</span>
-                  <span>Contact the finder using the provided contact information</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold">3.</span>
-                  <span>Prepare to verify ownership with specific details and your valid ID</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold">4.</span>
-                  <span>Arrange a safe meeting location on campus to retrieve your item</span>
-                </li>
-              </ol>
+              <h2 className="text-2xl font-bold mb-4">How It Works</h2>
+              
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-3">If You Found An Item:</h3>
+                <ol className="space-y-3 text-primary-foreground/90">
+                  <li className="flex gap-3">
+                    <span className="font-bold">1.</span>
+                    <span>Report the found item through our portal with detailed description</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">2.</span>
+                    <span>Surrender the item to your Department Dean's Office immediately</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">3.</span>
+                    <span>The Dean's Office will handle the verification and return process</span>
+                  </li>
+                </ol>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold mb-3">If You Lost An Item:</h3>
+                <ol className="space-y-3 text-primary-foreground/90">
+                  <li className="flex gap-3">
+                    <span className="font-bold">1.</span>
+                    <span>Report your lost item through our portal with detailed description</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">2.</span>
+                    <span>Check the Found Items section regularly to see if your item was reported</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">3.</span>
+                    <span>If you find a match, visit your Department Dean's Office with valid ID</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="font-bold">4.</span>
+                    <span>Verify ownership with specific details before claiming the item</span>
+                  </li>
+                </ol>
+              </div>
             </CardContent>
           </Card>
         </div>

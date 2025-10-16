@@ -2,7 +2,6 @@ import { Item } from "@/types/item";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Tag, Package } from "lucide-react";
-import ContactDialog from "./ContactDialog";
 
 interface ItemCardProps {
   item: Item;
@@ -81,10 +80,6 @@ const ItemCard = ({ item }: ItemCardProps) => {
               <span className="font-medium truncate block">{item.location}</span>
             </div>
           </div>
-        </div>
-        
-        <div className="pt-3 border-t">
-          <ContactDialog item={item} />
         </div>
       </CardContent>
     </Card>
