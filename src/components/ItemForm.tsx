@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import { ItemFormData, Item } from "@/types/item";
 import { saveItem } from "@/utils/storage";
-import { Upload } from "lucide-react";
+
 
 interface ItemFormProps {
   type: "lost" | "found";
@@ -19,6 +19,7 @@ const ItemForm = ({ type }: ItemFormProps) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<ItemFormData>({
     fullName: "",
+    srCode: "",
     contactInfo: "",
     description: "",
     category: "",
@@ -26,7 +27,6 @@ const ItemForm = ({ type }: ItemFormProps) => {
     color: "",
     date: "",
     location: "",
-    idPhoto: null,
   });
 
   const categories = [
@@ -47,16 +47,12 @@ const ItemForm = ({ type }: ItemFormProps) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setFormData((prev) => ({ ...prev, idPhoto: file }));
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.fullName || !formData.contactInfo || !formData.description || 
-        !formData.category || !formData.date || !formData.location || !formData.idPhoto) {
+    if (!formData.fullName || !formData.srCode || !formData.contactInfo || !formData.description || 
+        !formData.category || !formData.date || !formData.location) {
       toast.error("Please fill in all required fields");
       return;
     }
@@ -65,6 +61,7 @@ const ItemForm = ({ type }: ItemFormProps) => {
       id: Date.now().toString(),
       type,
       fullName: formData.fullName,
+      srCode: formData.srCode,
       contactInfo: formData.contactInfo,
       description: formData.description,
       category: formData.category,
@@ -72,7 +69,6 @@ const ItemForm = ({ type }: ItemFormProps) => {
       color: formData.color,
       date: formData.date,
       location: formData.location,
-      idPhoto: URL.createObjectURL(formData.idPhoto),
       status: "pending",
       createdAt: new Date().toISOString(),
     };
@@ -106,6 +102,18 @@ const ItemForm = ({ type }: ItemFormProps) => {
               value={formData.fullName}
               onChange={handleInputChange}
               placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="srCode">SR-Code (Student ID Number) *</Label>
+            <Input
+              id="srCode"
+              name="srCode"
+              value={formData.srCode}
+              onChange={handleInputChange}
+              placeholder="e.g., 20-12345"
               required
             />
           </div>
@@ -207,33 +215,6 @@ const ItemForm = ({ type }: ItemFormProps) => {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="idPhoto">Valid ID Photo *</Label>
-            <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary transition-colors">
-              <input
-                id="idPhoto"
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-                required
-              />
-              <label
-                htmlFor="idPhoto"
-                className="cursor-pointer flex flex-col items-center gap-2"
-              >
-                <Upload className="h-8 w-8 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  {formData.idPhoto
-                    ? formData.idPhoto.name
-                    : "Click to upload your valid ID"}
-                </span>
-              </label>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Required for verification purposes. Your ID will be kept confidential.
-            </p>
-          </div>
 
           <Button type="submit" className="w-full" size="lg">
             Submit Report

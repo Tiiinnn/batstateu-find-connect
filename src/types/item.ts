@@ -2,6 +2,7 @@ export interface Item {
   id: string;
   type: "lost" | "found";
   fullName: string;
+  srCode: string;
   contactInfo: string;
   description: string;
   category: string;
@@ -9,13 +10,13 @@ export interface Item {
   color?: string;
   date: string;
   location: string;
-  idPhoto: string;
   status: "pending" | "claimed" | "returned";
   createdAt: string;
 }
 
 export interface ItemFormData {
   fullName: string;
+  srCode: string;
   contactInfo: string;
   description: string;
   category: string;
@@ -23,5 +24,4 @@ export interface ItemFormData {
   color?: string;
   date: string;
   location: string;
-  idPhoto: File | null;
 }

@@ -1,8 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
-import { Search, Menu } from "lucide-react";
+import { Search, Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
 interface NavigationProps {
@@ -14,14 +20,20 @@ const Navigation = ({ onSearch }: NavigationProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = [
+  const simpleLinks = [
     { href: "/", label: "Home" },
-    { href: "/lost-items", label: "Lost Items" },
-    { href: "/found-items", label: "Found Items" },
-    { href: "/report-lost", label: "Report Lost" },
-    { href: "/report-found", label: "Report Found" },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
+  ];
+
+  const reportLinks = [
+    { href: "/report-lost", label: "Report Lost Item" },
+    { href: "/report-found", label: "Report Found Item" },
+  ];
+
+  const itemsLinks = [
+    { href: "/lost-items", label: "Lost Items" },
+    { href: "/found-items", label: "Found Items" },
   ];
 
   const handleSearch = (e: React.FormEvent) => {
@@ -31,24 +43,130 @@ const Navigation = ({ onSearch }: NavigationProps) => {
     }
   };
 
-  const NavLinks = ({ mobile = false }) => (
-    <>
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          to={link.href}
-          onClick={() => mobile && setIsOpen(false)}
-          className={`${
-            location.pathname === link.href
-              ? "text-primary font-semibold"
-              : "text-foreground/80 hover:text-primary"
-          } transition-colors ${mobile ? "block py-2" : ""}`}
-        >
-          {link.label}
-        </Link>
-      ))}
-    </>
-  );
+  const NavLinks = ({ mobile = false }) => {
+    if (mobile) {
+      return (
+        <>
+          {simpleLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              onClick={() => setIsOpen(false)}
+              className={`${
+                location.pathname === link.href
+                  ? "text-primary font-semibold"
+                  : "text-foreground/80 hover:text-primary"
+              } transition-colors block py-2`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <div className="py-2">
+            <div className="text-sm font-medium text-foreground/60 mb-2">Report</div>
+            {reportLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`${
+                  location.pathname === link.href
+                    ? "text-primary font-semibold"
+                    : "text-foreground/80 hover:text-primary"
+                } transition-colors block py-2 pl-4`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+          <div className="py-2">
+            <div className="text-sm font-medium text-foreground/60 mb-2">Browse</div>
+            {itemsLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`${
+                  location.pathname === link.href
+                    ? "text-primary font-semibold"
+                    : "text-foreground/80 hover:text-primary"
+                } transition-colors block py-2 pl-4`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {simpleLinks.map((link) => (
+          <Link
+            key={link.href}
+            to={link.href}
+            className={`${
+              location.pathname === link.href
+                ? "text-primary font-semibold"
+                : "text-foreground/80 hover:text-primary"
+            } transition-colors`}
+          >
+            {link.label}
+          </Link>
+        ))}
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center gap-1 text-foreground/80 hover:text-primary transition-colors">
+              Report
+              <ChevronDown className="h-4 w-4" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="bg-card">
+            {reportLinks.map((link) => (
+              <DropdownMenuItem key={link.href} asChild>
+                <Link
+                  to={link.href}
+                  className={`${
+                    location.pathname === link.href
+                      ? "text-primary font-semibold"
+                      : ""
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center gap-1 text-foreground/80 hover:text-primary transition-colors">
+              Browse Items
+              <ChevronDown className="h-4 w-4" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="bg-card">
+            {itemsLinks.map((link) => (
+              <DropdownMenuItem key={link.href} asChild>
+                <Link
+                  to={link.href}
+                  className={`${
+                    location.pathname === link.href
+                      ? "text-primary font-semibold"
+                      : ""
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </>
+    );
+  };
 
   return (
     <nav className="bg-card border-b border-border sticky top-0 z-50 shadow-sm">
