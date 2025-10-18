@@ -80,9 +80,9 @@ const Index = () => {
                 <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Reunite</h3>
+                <h3 className="font-bold text-lg mb-2">Claim</h3>
                 <p className="text-muted-foreground text-sm">
-                  Connect with the finder or owner to safely return the item
+                  Go to the designated office to claim your item with proper identification
                 </p>
               </CardContent>
             </Card>

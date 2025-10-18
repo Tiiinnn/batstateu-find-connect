@@ -10,6 +10,7 @@ export interface Item {
   color?: string;
   date: string;
   location: string;
+  designatedOffice?: string;
   status: "pending" | "claimed" | "returned";
   createdAt: string;
 }
@@ -24,4 +25,5 @@ export interface ItemFormData {
   color?: string;
   date: string;
   location: string;
+  designatedOffice?: string;
 }

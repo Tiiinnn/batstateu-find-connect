@@ -27,6 +27,7 @@ const ItemForm = ({ type }: ItemFormProps) => {
     color: "",
     date: "",
     location: "",
+    designatedOffice: "",
   });
 
   const categories = [
@@ -57,6 +58,11 @@ const ItemForm = ({ type }: ItemFormProps) => {
       return;
     }
 
+    if (type === "lost" && !formData.designatedOffice) {
+      toast.error("Please specify the designated office");
+      return;
+    }
+
     const newItem: Item = {
       id: Date.now().toString(),
       type,
@@ -69,6 +75,7 @@ const ItemForm = ({ type }: ItemFormProps) => {
       color: formData.color,
       date: formData.date,
       location: formData.location,
+      designatedOffice: formData.designatedOffice,
       status: "pending",
       createdAt: new Date().toISOString(),
     };
@@ -215,6 +222,22 @@ const ItemForm = ({ type }: ItemFormProps) => {
             </div>
           </div>
 
+          {type === "lost" && (
+            <div className="space-y-2">
+              <Label htmlFor="designatedOffice">Designated Office to Return Item *</Label>
+              <Input
+                id="designatedOffice"
+                name="designatedOffice"
+                value={formData.designatedOffice}
+                onChange={handleInputChange}
+                placeholder="e.g., Dean's Office - College of Engineering"
+                required
+              />
+              <p className="text-sm text-muted-foreground">
+                Please specify which office the finder should bring the item to if found
+              </p>
+            </div>
+          )}
 
           <Button type="submit" className="w-full" size="lg">
             Submit Report

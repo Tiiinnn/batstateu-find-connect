@@ -1,13 +1,23 @@
+import { useState } from "react";
 import { Item } from "@/types/item";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, MapPin, Tag, Package } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar, MapPin, Tag, Package, Building2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 interface ItemCardProps {
   item: Item;
 }
 
 const ItemCard = ({ item }: ItemCardProps) => {
+  const [showClaimDialog, setShowClaimDialog] = useState(false);
   const statusColors = {
     pending: "default",
     claimed: "secondary",
@@ -80,8 +90,69 @@ const ItemCard = ({ item }: ItemCardProps) => {
               <span className="font-medium truncate block">{item.location}</span>
             </div>
           </div>
+
+          {item.type === "lost" && item.designatedOffice && (
+            <div className="flex items-start gap-2 pt-2 border-t border-border/50">
+              <Building2 className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
+              <div>
+                <span className="text-xs font-medium text-muted-foreground">Return To:</span>
+                <p className="text-sm font-medium">{item.designatedOffice}</p>
+              </div>
+            </div>
+          )}
+
+          {item.type === "found" && (
+            <div className="pt-4">
+              <Button 
+                onClick={() => setShowClaimDialog(true)}
+                className="w-full"
+                size="sm"
+              >
+                Claim This Item
+              </Button>
+            </div>
+          )}
         </div>
       </CardContent>
+
+      {item.type === "found" && (
+        <Dialog open={showClaimDialog} onOpenChange={setShowClaimDialog}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Claim Item Instructions</DialogTitle>
+              <DialogDescription>
+                To claim this item, please follow these steps:
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div className="rounded-lg bg-muted p-4">
+                <div className="flex items-start gap-3">
+                  <Building2 className="h-5 w-5 text-primary mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold mb-1">Claim Location</h4>
+                    <p className="text-sm text-muted-foreground">
+                      [Admin will specify the office location]
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <h4 className="font-semibold text-sm">What to Bring:</h4>
+                <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                  <li>Valid Student ID</li>
+                  <li>Proof of ownership (photos, receipts, etc.)</li>
+                  <li>Be prepared to describe the item in detail</li>
+                </ul>
+              </div>
+
+              <Button onClick={() => setShowClaimDialog(false)} className="w-full">
+                Got it
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </Card>
   );
 };
