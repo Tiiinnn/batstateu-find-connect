@@ -1,7 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { Search, Menu, ChevronDown } from "lucide-react";
+import { Menu, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
@@ -11,13 +10,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 
-interface NavigationProps {
-  onSearch?: (query: string) => void;
-}
-
-const Navigation = ({ onSearch }: NavigationProps) => {
+const Navigation = () => {
   const location = useLocation();
-  const [searchQuery, setSearchQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   const simpleLinks = [
@@ -36,12 +30,6 @@ const Navigation = ({ onSearch }: NavigationProps) => {
     { href: "/found-items", label: "Found Items" },
   ];
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (onSearch) {
-      onSearch(searchQuery);
-    }
-  };
 
   const NavLinks = ({ mobile = false }) => {
     if (mobile) {
@@ -188,19 +176,6 @@ const Navigation = ({ onSearch }: NavigationProps) => {
             <NavLinks />
           </div>
 
-          {/* Search Bar */}
-          <form onSubmit={handleSearch} className="hidden md:flex items-center gap-2">
-            <div className="relative">
-              <Input
-                type="text"
-                placeholder="Search items..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 pl-10"
-              />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            </div>
-          </form>
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -212,18 +187,6 @@ const Navigation = ({ onSearch }: NavigationProps) => {
             <SheetContent side="right" className="w-[300px]">
               <div className="flex flex-col gap-4 mt-8">
                 <NavLinks mobile />
-                <form onSubmit={handleSearch} className="mt-4">
-                  <div className="relative">
-                    <Input
-                      type="text"
-                      placeholder="Search items..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10"
-                    />
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  </div>
-                </form>
               </div>
             </SheetContent>
           </Sheet>

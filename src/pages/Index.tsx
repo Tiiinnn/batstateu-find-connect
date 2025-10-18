@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Search, FileText, CheckCircle, Shield } from "lucide-react";
+import { FileText, CheckCircle, Building2 } from "lucide-react";
 
 const Index = () => {
   return (
@@ -35,54 +35,47 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 bg-background">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">How It Works</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="border-2 hover:border-primary transition-all">
-              <CardContent className="pt-6 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+      <section className="py-20 px-4 bg-background">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Simple & Secure Process</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Our streamlined system ensures your items are safely documented and returned through official channels
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg group">
+              <CardContent className="pt-8 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                   <FileText className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Report</h3>
-                <p className="text-muted-foreground text-sm">
-                  Submit a detailed report of your lost or found item with description and photo ID
+                <h3 className="font-bold text-xl mb-3">1. Report Item</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Submit a detailed report with your student ID number and item description. All information is kept confidential.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary transition-all">
-              <CardContent className="pt-6 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Search className="h-8 w-8 text-primary" />
+            <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg group">
+              <CardContent className="pt-8 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                  <Building2 className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Search</h3>
-                <p className="text-muted-foreground text-sm">
-                  Browse through reported items or use our search feature to find matches
+                <h3 className="font-bold text-xl mb-3">2. Submit to Office</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Found items must be surrendered to the Department Dean's Office for secure processing and verification.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="border-2 hover:border-primary transition-all">
-              <CardContent className="pt-6 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="h-8 w-8 text-primary" />
-                </div>
-                <h3 className="font-bold text-lg mb-2">Verify</h3>
-                <p className="text-muted-foreground text-sm">
-                  Verify ownership through detailed descriptions and valid identification
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:border-primary transition-all">
-              <CardContent className="pt-6 text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Card className="border-2 hover:border-primary/50 transition-all hover:shadow-lg group">
+              <CardContent className="pt-8 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
                   <CheckCircle className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Claim</h3>
-                <p className="text-muted-foreground text-sm">
-                  Go to the designated office to claim your item with proper identification
+                <h3 className="font-bold text-xl mb-3">3. Claim Item</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Visit the designated office with your student ID to claim your item after proper verification.
                 </p>
               </CardContent>
             </Card>
@@ -91,30 +84,53 @@ const Index = () => {
       </section>
 
       {/* Quick Access Section */}
-      <section className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Quick Access</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Link to="/lost-items">
-              <Card className="border-2 hover:border-primary transition-all cursor-pointer h-full hover:shadow-lg">
-                <CardContent className="pt-6">
-                  <h3 className="font-bold text-xl mb-3 text-primary">Lost Items</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Browse through items that have been reported as lost by members of our community
-                  </p>
-                  <Button variant="outline" className="w-full">View Lost Items</Button>
+      <section className="py-20 px-4 bg-muted/30">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-foreground">Browse Reported Items</h2>
+            <p className="text-muted-foreground text-lg">
+              Check our databases to see if your item has been reported
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Link to="/lost-items" className="group">
+              <Card className="border-2 hover:border-primary transition-all h-full hover:shadow-xl">
+                <CardContent className="p-8">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                      <FileText className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-2xl mb-2 text-foreground group-hover:text-primary transition-colors">Lost Items</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        View items reported as lost by students and staff. If you found something, check here to help return it.
+                      </p>
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    Browse Lost Items
+                  </Button>
                 </CardContent>
               </Card>
             </Link>
 
-            <Link to="/found-items">
-              <Card className="border-2 hover:border-primary transition-all cursor-pointer h-full hover:shadow-lg">
-                <CardContent className="pt-6">
-                  <h3 className="font-bold text-xl mb-3 text-primary">Found Items</h3>
-                  <p className="text-muted-foreground mb-4">
-                    Check if someone has found and reported your lost item
-                  </p>
-                  <Button variant="outline" className="w-full">View Found Items</Button>
+            <Link to="/found-items" className="group">
+              <Card className="border-2 hover:border-primary transition-all h-full hover:shadow-xl">
+                <CardContent className="p-8">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                      <CheckCircle className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-2xl mb-2 text-foreground group-hover:text-primary transition-colors">Found Items</h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        Check if someone has found and reported your lost item. Visit the designated office to claim it.
+                      </p>
+                    </div>
+                  </div>
+                  <Button variant="outline" className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    Browse Found Items
+                  </Button>
                 </CardContent>
               </Card>
             </Link>

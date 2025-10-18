@@ -2,37 +2,21 @@ import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ItemCard from "@/components/ItemCard";
-import { Input } from "@/components/ui/input";
-import { getLostItems, searchItems } from "@/utils/storage";
+import { getLostItems } from "@/utils/storage";
 import { Item } from "@/types/item";
-import { Search } from "lucide-react";
+import { Package } from "lucide-react";
 
 const LostItems = () => {
   const [items, setItems] = useState<Item[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    loadItems();
-  }, []);
-
-  const loadItems = () => {
     const lostItems = getLostItems();
     setItems(lostItems);
-  };
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    if (query.trim()) {
-      const results = searchItems(query, "lost");
-      setItems(results);
-    } else {
-      loadItems();
-    }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navigation onSearch={handleSearch} />
+      <Navigation />
       
       <main className="flex-1 py-12 px-4 bg-gradient-to-b from-background to-muted/20">
         <div className="container mx-auto">
@@ -45,36 +29,14 @@ const LostItems = () => {
             </p>
           </div>
 
-          <div className="mb-8">
-            <div className="relative max-w-2xl">
-              <Input
-                type="text"
-                placeholder="Search by description, category, brand, color, or location..."
-                value={searchQuery}
-                onChange={(e) => handleSearch(e.target.value)}
-                className="pl-12 h-12 text-base shadow-sm"
-              />
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-            </div>
-            {searchQuery && (
-              <p className="mt-3 text-sm text-muted-foreground">
-                Showing results for: <span className="font-semibold text-foreground">"{searchQuery}"</span>
-              </p>
-            )}
-          </div>
-
           {items.length === 0 ? (
             <div className="text-center py-20">
               <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="h-10 w-10 text-muted-foreground" />
+                <Package className="h-10 w-10 text-muted-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">
-                {searchQuery ? "No matching items found" : "No lost items reported yet"}
-              </h3>
+              <h3 className="text-xl font-semibold mb-2">No lost items reported yet</h3>
               <p className="text-muted-foreground max-w-md mx-auto">
-                {searchQuery 
-                  ? "Try adjusting your search terms or browse all items" 
-                  : "When someone reports a lost item, it will appear here"}
+                When someone reports a lost item, it will appear here
               </p>
             </div>
           ) : (
